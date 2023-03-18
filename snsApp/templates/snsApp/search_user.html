@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnsApp</title>
+    <link rel="stylesheet" href="/../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/30ca514f03.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      
+      .thumbnail{
+        width:60px;
+        height:60px;
+        border-radius:50%;
+      }
+      .main-search{
+        margin-left:20px;
+      }
+      .search-result{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+      .search-hover{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        border-bottom:1px solid rgb(200, 200, 200);
+        padding:10px;
+      
+        
+      }
+      #search-result-info{
+        margin-left:30px;
+      }
+      main{
+        justify-content:space-between;
+        max-width:1150px
+      }
+      .main-search{
+        flex:0.65;
+
+      }
+    </style>
+</head>
+<body>
+  {% include "./nav.html" %}
+    <main>
+    
+      <div class="main-left">
+        <div class="btns">
+            <a href=""><i class="fas fa-home"></i><span> For You</span></a>
+            <a href=""><i class="fas fa-user-friends"></i><span> Following</span></a>
+            <a href=""><i class="fas fa-video"></i><span> LIVE</span></a>
+        </div>
+        <div class="login-frame">
+            <p>Sign in to see mores.</p>
+            <button><a href="/login" style="color:rgb(254,44,85);padding:1rem;">Log in</a></button>
+        </div>
+        <div class="user-recommended">
+            <p>Recommended accounts</p>
+            <div class="user">
+                <img src="/../static/img/avatar1.jpeg" alt="avatar">
+                <h6 class="username">Travor.bell99</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar2.jpeg" alt="avatar">
+                <h6 class="username">chillmusci</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar3.jpeg" alt="avatar">
+                <h6 class="username">zuands</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar4.jpeg" alt="avatar">
+                <h6 class="username">bayashi.tiktok</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar5.jpeg" alt="avatar">
+                <h6 class="username">zipee21</h6>
+            </div>
+        </div>
+        <div class="tags">
+            <p>Discover</p>
+            <div>
+                <a href=""># tiktokcook</a>
+                <a href=""># upwork</a>
+                <a href=""># games</a>
+                <a href=""># musical</a>
+                <a href=""># relax</a>
+                <a href=""># news</a>
+                <a href=""># valentine</a>
+                <a href=""># happynewyear</a>
+                <a href=""># cat</a>
+                <a href=""># harrykane</a>
+            </div>
+        </div>
+        <div class="links">
+            <div>
+                <div class="link">
+                    <a href="">About</a>
+                    <a href="">Newroom</a>
+                    <a href="">Contact</a>
+                    <a href="">Careers</a>
+                    <a href="">ByteDance</a>
+                    <a href="">Terms</a>
+                    <a href="">Privacy</a>
+                 </div>
+             </div>
+        </div>
+        <div class="copyright">2023snsApp</div>
+      </div>
+      <div class="main-search">
+        <div class="grid-x grid-margin-x">
+          <div class="cell large-3"></div>  
+          <div class="cell large-7">
+            <h5 style="font-size:2rem;font-weight:700;;">Search result...</h5>
+            <div class="seach-form">
+              {% for user, img in search_result %}
+              <div class="search-hover">
+                  <div class="search-result" id="search-result-img">
+                    {% if img %}
+                      <a style="text-align:center" href="{{ user }}"><img src="{{ img }}" class="thumbnail"</a>
+                    {% else %}
+                      <a style="text-align:center" href="{{ user }}"><img src="/static/media/blank.png" class="thumbnail"></a>
+                    {% endif %}
+                  </div>
+                  <div class="search-result"  id="search-result-info">
+                    <a style="text-align:center;font-weight:900;font-size:1rem" href="/{{ user }}/"> {{ user }}</a>
+                    <p style="text-align:center;margin:0px" >{{ user.first_name }} {{ user.last_name }}</p>
+                  </div>
+                </div>
+            {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="cell auto"></div>
+        </div>
+      </div>
+    
+</main>
+  {% include "./footer.html" %}
+</body>

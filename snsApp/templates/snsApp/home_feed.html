@@ -1,0 +1,104 @@
+
+<main>
+  <div class="main-left" style="flex:0.25">
+      <div class="btns">
+          <a href=""><i class="fas fa-home"></i><span> For You</span></a>
+          <a href=""><i class="fas fa-user-friends"></i><span> Following</span></a>
+          <a href=""><i class="fas fa-video"></i><span> LIVE</span></a>
+      </div>
+      {% if user.is_authenticated %}
+      {% else %}
+      <div class="login-frame">
+          <p>Sign in to see mores.</p>
+          <button><a href="/login" style="color:rgb(254,44,85);padding:1rem;">Log in</a></button>
+
+      </div>
+      {% endif %}
+      <div class="user-recommended">
+          <p>Recommended accounts</p>
+          <div class="user">
+              <img src="/../static/img/avatar1.jpeg" alt="avatar">
+              <h6 class="username">Travor.bell99</h6>
+          </div>
+          <div class="user">
+              <img src="/../static/img/avatar2.jpeg" alt="avatar">
+              <h6 class="username">chillmusci</h6>
+          </div>
+          <div class="user">
+              <img src="/../static/img/avatar3.jpeg" alt="avatar">
+              <h6 class="username">zuands</h6>
+          </div>
+          <div class="user">
+              <img src="/../static/img/avatar4.jpeg" alt="avatar">
+              <h6 class="username">bayashi.tiktok</h6>
+          </div>
+          <div class="user">
+              <img src="/../static/img/avatar5.jpeg" alt="avatar">
+              <h6 class="username">zipee21</h6>
+          </div>
+      </div>
+      <div class="tags">
+          <p>Discover</p>
+          <div>
+              <a href=""># tiktokcook</a>
+              <a href=""># upwork</a>
+              <a href=""># games</a>
+              <a href=""># musical</a>
+              <a href=""># relax</a>
+              <a href=""># news</a>
+              <a href=""># valentine</a>
+              <a href=""># happynewyear</a>
+              <a href=""># cat</a>
+              <a href=""># harrykane</a>
+          </div>
+      </div>
+      <div class="links">
+          <div>
+              <div class="link">
+                  <a href="">About</a>
+                  <a href="">Newroom</a>
+                  <a href="">Contact</a>
+                  <a href="">Careers</a>
+                  <a href="">ByteDance</a>
+                  <a href="">Terms</a>
+                  <a href="">Privacy</a>
+               </div>
+           </div>
+      </div>
+      <div class="copyright">2023snsApp</div>
+  </div>
+<div class="main-right" style="flex:0.7" >
+        {% for post in posts %}
+            <div class="user" style="padding-bottom:3rem;display:flex;flex-direction:column;align-items:flex-start;margin-left:1rem;border-bottom:1px solid rgb(200,200,200);width:80%">
+                <div style="display:flex;flex-direction:row;width:100%">
+                
+                    <img src="/static/media/blank.png"="avtar" style="width:60px;height:60px;border-radius:50%;">
+                    <h6 style="font-size:1.5rem;display:flex;align-items:center;margin-left:1rem"><a href="/{{ post.user }}">{{ post.user }}</a></h6>
+                
+                <button class="followers-btn" style="margin-left:10rem;margin-top :1rem; background-color: transparent; border: 1px solid rgb(254,44,85); color :rgb(254,44,85); font-size: 0.9rem; font-weight: 600; cursor: pointer; border-radius: 5px; height:1.7rem; width:5.7rem;">Follow</button>
+            </div>
+                <p style="margin-left:4.8rem;">{{ post.text }} ({{ post.postDate }})</p>
+                {% if post.media %}
+                <div style="width:100%;display:flex;flex-direction:row;">
+                <img style="width:285px;height:510px;border-radius:0;margin-left:4.8rem;position:relative" class="post-img" src="{{ post.media.url }}" >
+                <div class="video-icons" style="top:0%;left:0%;position:relative;margin-left:1rem;margin-top:18.2rem">
+                    <a href=""><i class="fas fa-heart fa-lg"></i><span>1.6M</span></a>
+                    <a href=""><i class="fa-solid fa-comment-dots"></i><span>356.6K</span></a>
+                    <a href=""><i class="fas fa-share fa-lg"></i><span>565.2K</span></a>
+             </div>
+            </div>
+                {% endif %}
+            </div>
+            
+            {% endfor %}
+</div>
+         
+
+
+        </main>
+<div id="login-popup" style="display: none;">
+</div>
+<script src="/../static/js/popup.js"></script>
+<script src="/../static/js/script.js"></script>
+</body>
+</html> 

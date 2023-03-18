@@ -1,0 +1,83 @@
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign up</title>
+        <link rel="stylesheet" href="/../static/css/register.css">
+        <script src="https://kit.fontawesome.com/30ca514f03.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/../static/css/reset.css">
+        <style>
+          .register input[type="text"]{
+            outline: none;
+            background-color: rgba(255,255,255,.5);
+            border: 1px solid gray;
+            padding: 1rem 1.5rem;
+            padding-left: calc(1rem * 1.5);
+            border-radius: 40px;
+            width: 95%;
+            transition: background .5s;
+            font-weight: 300;
+            font-size: .9rem;
+          }
+          .register input[type="text"]:focus{
+            background-color:gray;
+            color:white ;
+          }
+          .login-hover:hover{
+            text-decoration:underline;
+          }
+          .date-birth{
+            padding:.5rem;
+            outline: none;
+        }
+          .date-birth:focus{
+            background-color:gray;
+            
+          }
+        </style> 
+    </head>
+{% block content %}
+      {% if registered %}
+      <div style="display:flex;flex-direction: column;width:240px;height: 240px;background-color: white;justify-content: center;align-items: center;
+    margin-top:1rem;border-radius: 10px;border:1px solid gray;">
+        <strong>Thanks For Sign Up</strong>
+        <p style="margin-top:2rem">Click here to <a class="login-hover"style="color:red;text-decoration: none;font-size:1rem;font-weight: 700;" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a><p>
+        <!-- add some links to go other page -->
+        </p>
+    </div>
+      {% else %}
+      <div class="register-container">
+        <div class="register">
+            <a style="color: black;" href="/login"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="logo">
+                <img src="../static/img/mainlogo.png" alt="">
+            </div>
+            <div class="main">
+                <div class="header">
+                    <h1>Register</h1>
+                </div>
+                <form id="user_form" class="form" action="/signup/" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ user_form.as_p}}
+                  {{ profile_form.as_p}}
+                  <button type="submit" class="hollow button" id="register-button">Sign Up</button>
+                </form>
+            </div>
+            <div class="message">
+                By continuing, you agree to SnsApp's <a href="">Terms of Use</a> and confirm that you have read and understood the SnsApp <a href=""> Privacy Policy.</a>
+            </div>
+            <div class="footer">
+                <p>Do you have already an account? <a href="/login">Log in</a></p>
+            </div>
+        </div>
+    </div>
+    
+      {% endif %}
+{% endblock %}

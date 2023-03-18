@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnsApp</title>
+    <link rel="stylesheet" href="/../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/30ca514f03.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      .thumbnail{
+        height:120px;
+        width:120px;
+        border-radius:50%;
+      }
+      h4{
+        font-size:2rem;
+        margin:0;
+      }
+      #edit-profile-button{
+        font-size:15px !important;
+        margin-left:10rem;
+        margin-bottom:10px;
+        border:1px solid gray;
+        padding:6px 6px;
+        font-weight:500;
+      }
+      #edit-profile-button:hover{
+        background-color:gray;
+      }
+      main{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+       
+      }
+      .main-right{
+        margin-left:20px;
+      }
+      .followers{
+        font-weight:bold;
+        font-size:20px;
+        color:red;
+        margin-top:50px;
+      }
+      .info{
+        width:700px;
+        border-right:1px solid gray;
+        height:350px;
+      }
+      .main-post{
+        margin-top:3rem;
+        display:flex;
+        justify-content:space-between; 
+        {% comment %} border-top:1px solid gray; {% endcomment %}
+        
+      }
+      #overlay{
+        margin-left:10px;
+        display:flex;
+        flex-direction:collumn;
+        width:700px;
+      }
+      .name{
+        font-weight:600;
+        font-size:1rem;
+      }
+      main{
+        padding-top:20px;
+      }
+      #create-post-button{
+        font-weight:500;
+        text-transform:uppercase;
+      }
+      #create-post-button:hover{
+        background-color:white;
+      }
+      #new-post-button{
+        background:black;
+        color:white;
+        padding:5px 10px;
+        margin-top:1.5rem;
+        text-transform: uppercase;
+        transition: background .5s;
+      }
+      .ocupation,
+      .organization{
+        font-weight:400;
+        font-size:.8rem;
+      }
+      .textarea{
+        resize:none;
+        outline:none;
+        font-size:1rem;
+        font-weight:600;
+        padding:0.5rem;
+      }
+      
+    </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-container">
+     <div class="header-container__left">
+         <a href="/" class="logo-href"><img class="logo" src="/../static/img/mainlogo.png" alt=""></a>
+     </div>
+     <div style="display:flex;flex-direction:row;align-items:center">
+      {% if img_url %}
+              <img style="width:40px;height:40px;border-radius:50%;border:1px solid gray" class="thumbnail" id="user-home-profile-thumbnail" src="{{ img_url }}" alt="user profile image">
+            {% else %}
+              <img style="width:40px;height:40px;border-radius:50%;border:1px solid gray" class="thumbnail" id="user-home-profile-thumbnail" src="/static/media/blank.png" alt="user profile image">
+            {% endif %}
+     <p style="font-size:1rem;font-weight:bold;margin-left:3px">{{ user }}</p>
+     </div>
+     <div class="header-container__middle">
+      <form class="search" method="POST" action="{% url 'search-user'%}">
+        {% csrf_token %}
+        
+          <input type="search" placeholder="Search for accounts" name="q" class="input-post" style="font-weight: 400;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          border: none;
+          background: transparent;
+          outline: none;
+          padding: 0;
+          width: 292px;
+          color: rgba(22, 24, 35, 1);
+          caret-color: rgba(254, 44, 85, 1);
+          appearance: textfield;">
+          <button type="submit" id="search-button" class="button-post" style="padding: 11px 16px 11px 12px;
+          margin: -12px -16px;
+          font-size: 0;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          background: transparent;
+          margin-left: 0;">
+            <svg width="24" data-e2e="" height="24" viewBox="0 0 48 48" fill="rgba(22, 24, 35, .34)" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 10C15.3726 10 10 15.3726 10 22C10 28.6274 15.3726 34 22 34C28.6274 34 34 28.6274 34 22C34 15.3726 28.6274 10 22 10ZM6 22C6 13.1634 13.1634 6 22 6C30.8366 6 38 13.1634 38 22C38 25.6974 36.7458 29.1019 34.6397 31.8113L43.3809 40.5565C43.7712 40.947 43.7712 41.5801 43.3807 41.9705L41.9665 43.3847C41.5759 43.7753 40.9426 43.7752 40.5521 43.3846L31.8113 34.6397C29.1019 36.7458 25.6974 38 22 38C13.1634 38 6 30.8366 6 22Z"></path></svg>
+  
+          </button>
+        </ul>
+      </form>
+     </div>
+     <div class="header-container__right">
+      {% if user.is_authenticated %}
+      <div class="logined">
+      <div class="post">
+        <a href="/user_home/" class="post_href">
+            <div class="div">
+                <svg class="tiktok-qeydvm-StyledPlusIcon e18d3d944" width="1em" data-e2e="" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z"></path></svg>
+                <span class="post-span">
+                    <font>POST</font>
+                </span>
+            </div>
+          </div>
+    </a>
+    </div>
+      <a style="padding:10px;font-size:20px;margin-left:10px" class="login-a" href="/chat/<str:room_name>/"><i class="fa-sharp fa-solid fa-comments"></i></a>
+      <a style="padding:10px;font-size:20px;margin-left:10px" class="login-a"href="/user_home"><i class="fa-solid fa-user"></i></a>
+      <a style="padding:10px;font-size:20px;margin-left:10px" class="login-a"href="../logout"> <i class="fa-solid fa-right-from-bracket"></i></a>
+      </div>
+           {% else %}
+           <div class="post">
+            <a href="/login" class="post_href">
+                <div class="div">
+                    <svg class="tiktok-qeydvm-StyledPlusIcon e18d3d944" width="1em" data-e2e="" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z"></path></svg>
+                    <span class="post-span">
+                        <font>POST</font>
+                    </span>
+                </div>
+        </a>
+        </div>
+        <button class="button" type="button">
+            <a href="/login" style="color:white;">Log in</a>
+          </button>
+  
+  
+  
+           {% endif %}
+         <div class="dropdown" >
+             <i style="font-size:20px" class="fa-solid fa-ellipsis-vertical"></i>
+            <div class="menu hidden">
+             <ul>
+                 <li>
+                     <a href=""><i class="fas fa-font fa-lg"></i>English</a>
+                 </li>
+                 <li>
+                     <a href=""><i class="fa-regular fa-circle-question"></i>Feedback and help</a>
+                 </li>
+                 <li>
+                     <a href=""><i class="far fa-keyboard fa-lg"></i>Keyboard</a>
+                 </li>
+             </ul>
+            </div>
+         </div>
+     </div>
+    </div>
+  </div>
+  <script src="/../static/js/popup.js"></script>
+  <script src="/../static/js/script.js"></script>
+  <main>
+    <div class="main-left" style="flex:.25">
+        <div class="btns">
+            <a href=""><i class="fas fa-home"></i><span> For You</span></a>
+            <a href=""><i class="fas fa-user-friends"></i><span> Following</span></a>
+            <a href=""><i class="fas fa-video"></i><span> LIVE</span></a>
+        </div>
+        {% if user.is_authenticated %}
+      {% else %}
+      <div class="login-frame">
+          <p>Sign in to see mores.</p>
+          <button><a href="/login" style="color:rgb(254,44,85);padding:1rem;">Log in</a></button>
+
+      </div>
+      {% endif %}
+        <div class="user-recommended">
+            <p>Recommended accounts</p>
+            <div class="user">
+                <img src="/../static/img/avatar1.jpeg" alt="avatar">
+                <h6 class="username">Travor.bell99</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar2.jpeg" alt="avatar">
+                <h6 class="username">chillmusci</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar3.jpeg" alt="avatar">
+                <h6 class="username">zuands</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar4.jpeg" alt="avatar">
+                <h6 class="username">bayashi.tiktok</h6>
+            </div>
+            <div class="user">
+                <img src="/../static/img/avatar5.jpeg" alt="avatar">
+                <h6 class="username">zipee21</h6>
+            </div>
+        </div>
+        <div class="tags">
+            <p>Discover</p>
+            <div>
+                <a href=""># tiktokcook</a>
+                <a href=""># upwork</a>
+                <a href=""># games</a>
+                <a href=""># musical</a>
+                <a href=""># relax</a>
+                <a href=""># news</a>
+                <a href=""># valentine</a>
+                <a href=""># happynewyear</a>
+                <a href=""># cat</a>
+                <a href=""># harrykane</a>
+            </div>
+        </div>
+        <div class="links">
+            <div>
+                <div class="link">
+                    <a href="">About</a>
+                    <a href="">Newroom</a>
+                    <a href="">Contact</a>
+                    <a href="">Careers</a>
+                    <a href="">ByteDance</a>
+                    <a href="">Terms</a>
+                    <a href="">Privacy</a>
+                 </div>
+             </div>
+        </div>
+        <div class="copyright">2023snsApp</div>
+      </div>
+    </div>
+      <div class="main-right" style="flex:.7">
+    <div class="grid-x grid-margin-x">
+      <div class="cell large-2"></div>
+      <div class="large-8 cell">
+        <div class="user-home-profile" id="user-home-profile-img">
+          {% if img_url %}
+            <img class="thumbnail" id="user-home-profile-thumbnail" src="{{ img_url }}" alt="user profile image">
+          {% else %}
+            <img class="thumbnail" id="user-home-profile-thumbnail" src="/static/media/blank.png" alt="user profile image">
+          {% endif %}
+        </div>
+        <div class="user-home-profile" id="user-home-profile-info">
+          <h4 >{{ user }} <a href="/profile" class="hollow button" id="edit-profile-button"><i class="fa-solid fa-pen-to-square"></i>Edit profile</a></h4>
+          <p class="name"> {{ user.first_name}} {{ user.last_name}}</p>
+          <div class="main-post">
+          <div class="info">
+          
+          <p class="ocupation">Ocupation : {{ user_profile.ocupation }}</p>
+          <p class="organziation">Organization : {{ user_profile.organization }}</p>
+          <p>{{ user_profile.bio }}</p>
+          <p class="followers">{{ follower_count }} &nbsp;<a href="/friend_list/">Followers</a>&nbsp;&nbsp;&nbsp;
+          {{ following_count }} &nbsp;<a href="/friend_list/">Following</a></p>
+          </div>  
+          
+          
+        
+
+        <div id="overlay">
+          <div class="callout">
+            <a href="#" class='button' onclick="overlay()" id="create-post-button">Create Post</a>
+            <form action="/user_home/" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ post_form.as_p }}
+              <button type="submit" class="button" id="new-post-button" style="border:0">POST</button>
+              <a href="#" onclick="overlay()" class="button alert" id="new-post-button" style="margin-left:250px;">CANCEL</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="grid-containor">
+        <div class="grid-x grid-margin-x">
+          <div class="cell large-6"></div>
+          <div class="large-6 cell">
+            {% for post in posts %}
+            <div class="card">
+              <div class="card-section">
+                <p>{{ post.text }} ({{ post.postDate }})</p>
+                <p><i class="fi-heart"></i> 1M likes</p>
+              </div>
+              {% if post.media %}
+              <img class="post-img" src="{{ post.media.url }}" style="width:360px;height:540px;border:1px solid black">
+              {% endif %}
+              
+            </div>
+            {% endfor %}
+          </div>
+          <div class="auto cell"></div>
+        </div>
+      </div>
+      <div class="cell auto"></div>
+    </div>
+  </div>
+</div>
+  {% include "./footer.html" %}
+</main>
+</body>

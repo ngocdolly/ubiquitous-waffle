@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnsApp</title>
+    <link rel="stylesheet" href="/../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/30ca514f03.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .followers-btn:hover{
+            background-color:rgba(254, 44, 85,.1);
+        }
+
+    </style>
+</head>
+<body>
+  {% include "./nav.html" %}
+  <div class="grid-containor">
+    <div class="grid-x grid-margin-x">
+      <div class="cell large-3"></div>
+      <div class="cell large-5">
+        {% block content %}
+        {% include "snsApp/home_feed.html"%}
+        {% endblock %}
+      </div>
+      <div class="cell auto">
+        {% block sidebar %}
+        {% comment %} {% include "snsApp/sidebar.html" %} {% endcomment %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>

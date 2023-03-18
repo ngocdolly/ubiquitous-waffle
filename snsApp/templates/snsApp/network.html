@@ -1,0 +1,109 @@
+{% include "./header.html" %}
+<body>
+  {% include "./nav.html" %}
+  <main>
+  <div class="main-left" style="flex:0.25">
+    <div class="btns">
+        <a href=""><i class="fas fa-home"></i><span> For You</span></a>
+        <a href=""><i class="fas fa-user-friends"></i><span> Following</span></a>
+        <a href=""><i class="fas fa-video"></i><span> LIVE</span></a>
+    </div>
+    {% if user.is_authenticated %}
+    {% else %}
+    <div class="login-frame">
+        <p>Sign in to see mores.</p>
+        <button><a href="/login" style="color:rgb(254,44,85);padding:1rem;">Log in</a></button>
+
+    </div>
+    {% endif %}
+    <div class="user-recommended">
+        <p>Recommended accounts</p>
+        <div class="user">
+            <img src="/../static/img/avatar1.jpeg" alt="avatar">
+            <h6 class="username">Travor.bell99</h6>
+        </div>
+        <div class="user">
+            <img src="/../static/img/avatar2.jpeg" alt="avatar">
+            <h6 class="username">chillmusci</h6>
+        </div>
+        <div class="user">
+            <img src="/../static/img/avatar3.jpeg" alt="avatar">
+            <h6 class="username">zuands</h6>
+        </div>
+        <div class="user">
+            <img src="/../static/img/avatar4.jpeg" alt="avatar">
+            <h6 class="username">bayashi.tiktok</h6>
+        </div>
+        <div class="user">
+            <img src="/../static/img/avatar5.jpeg" alt="avatar">
+            <h6 class="username">zipee21</h6>
+        </div>
+    </div>
+    <div class="tags">
+        <p>Discover</p>
+        <div>
+            <a href=""># tiktokcook</a>
+            <a href=""># upwork</a>
+            <a href=""># games</a>
+            <a href=""># musical</a>
+            <a href=""># relax</a>
+            <a href=""># news</a>
+            <a href=""># valentine</a>
+            <a href=""># happynewyear</a>
+            <a href=""># cat</a>
+            <a href=""># harrykane</a>
+        </div>
+    </div>
+    <div class="links">
+        <div>
+            <div class="link">
+                <a href="">About</a>
+                <a href="">Newroom</a>
+                <a href="">Contact</a>
+                <a href="">Careers</a>
+                <a href="">ByteDance</a>
+                <a href="">Terms</a>
+                <a href="">Privacy</a>
+             </div>
+         </div>
+    </div>
+    <div class="copyright">2023snsApp</div>
+</div>
+<div class="main-right" style="margin-left:1rem">
+  <div class="" >
+    <div class="grid-x grid-margin-x">
+      <div class="cell large-3"></div>
+      <div class="cell large-7">
+        <h5 style="font-weight:700;font-size:1.5rem;color:red;margin-bottom:1rem;margin-top:2rem"><i class="fa-solid fa-heart"></i> Followers</h5>
+        <ul style="align-items:inherit;margin-left:2rem">
+          {% for user in follower_list %}
+          <div style="display:flex;flex-direction:row;align-items:center;margin-bottom:1rem">
+          {% if img %}
+          <a style="text-align:center" href="/{{ user.follower }}/"><img style="width:50px;height:60px;border-radius:50%;border:1px solid gray;" src="{{ img }}" class="thumbnail"</a>
+        {% else %}
+          <a style="text-align:center" href="/{{ user.follower }}/"><img style="width:50px;height:60px;border-radius:50%;border:1px solid gray;" src="/static/media/blank.png" class="thumbnail"></a>
+        {% endif %}
+            <li><a style="margin-left:2.5rem;font-weight:600;font-size:1rem" href="/{{ user.follower }}/">{{ user.follower }}</a></li>
+          </div>
+          {% endfor %}
+        </ul>
+        <h5 style="font-weight:700;font-size:1.5rem;color:red;margin-bottom:1rem;margin-top:1rem"><i class="fa-sharp fa-solid fa-check"></i> Following</h5>
+        <ul style="align-items:inherit;margin-left:2rem">
+          {% for user in following_list %}
+          <div style="display:flex;flex-direction:row;align-items:center;margin-bottom:1rem;">
+            {% if img %}
+          <a style="text-align:center" href="/{{ user.user }}/"><img style="width:50px;height:60px;border-radius:50%;border:1px solid gray;" src="{{ img }}" class="thumbnail"</a>
+          {% else %}
+          <a style="text-align:center" href="/{{ user.user }}/"><img style="width:50px;height:60px;border-radius:50%;border:1px solid gray;" src="/static/media/blank.png" class="thumbnail"></a>
+          {% endif %}
+          <li><a style="margin-left:2.5rem;font-weight:600;font-size:1rem" href="/{{ user.user }}/">{{ user.user }}</a></li>
+          </div>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="cell auto"></div>
+    </div>
+  </div>
+</div>
+</main>
+</body>

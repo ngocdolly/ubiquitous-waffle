@@ -1,0 +1,122 @@
+body { 
+    background-color: rgba(0,0,0,.5);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+}
+.register{
+    width:450px;
+    background-color: white;
+    padding:2.5rem;
+    border-radius: 20px;
+    position: relative;
+    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding-bottom: 1rem;
+}
+.register img{
+    width: 80px;
+}
+.register a{
+    text-decoration: none;
+    color:rgb(254,44,85);
+}
+.register a:hover{
+    text-decoration: underline;
+}
+.date-birth{
+    color:blue;
+}
+.logo,
+.header,
+.footer{
+    text-align: center;
+}
+ .birth-date h4{
+    font-size:1rem;
+    font-weight: 700;
+    margin-top:2rem;
+}
+.birth-date input{
+    outline: none;
+    background-color: rgba(255,255,255,.5);
+    border: 1px solid gray;
+    padding:1rem 1.5rem;
+    padding-left: calc(1rem * 1.5);
+    width: 95%;
+    transition: background .5s;
+    font-size:1rem;
+    font-weight: 300;
+}
+.birth-date p{
+    font-size:14px;
+    color: rgba(22, 24, 35, 0.5);
+}
+.register input[type="password"],
+.register input[type="email"]{
+    outline: none;
+    background-color: rgba(255,255,255,.5);
+    border: 1px solid gray;
+    padding:1rem 1.5rem !important;
+    padding-left: calc(1rem * 1.5);
+    border-radius: 40px;
+    width: 95%;
+    transition: background .5s;
+    font-weight: 300;
+    font-size: .9rem;
+}
+
+
+.register input:focus{
+    background:gray;
+    color:white;
+}
+.checkbox {
+    display: flex;
+    gap:7px;
+    margin-top: 1rem;
+}
+.register .password {
+    margin-top:1rem
+}
+.checkbox label {
+    font-size: 14px;
+    color:rgba(22, 24, 35, 0.5)
+}
+.register input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: red;
+}
+
+.form button{
+    background:black;
+    color:white;
+    padding:1rem;
+    border-radius:50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background .5s;
+    width: 95%;
+}
+.form button:hover{
+    background-color:gray;
+    cursor: pointer;
+
+}
+.message {
+    color:rgba(22, 24, 35, 0.5);
+    font-size: 11px;
+
+}
+.footer {
+    border-top: 1px solid black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.footer a { 
+    font-weight: 600;
+    font-size:1.2rem;
+}
